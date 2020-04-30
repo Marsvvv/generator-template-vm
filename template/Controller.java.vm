@@ -1,0 +1,87 @@
+package ${package}.${moduleName}.controller;
+
+import java.util.Arrays;
+import java.util.Map;
+
+import io.renren.common.validator.ValidatorUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import ${package}.${moduleName}.entity.${className}Entity;
+import ${package}.${moduleName}.service.${className}Service;
+import ${mainPath}.common.utils.PageUtils;
+import ${mainPath}.common.utils.R;
+
+
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@RestController
+@RequestMapping("${moduleName}/${pathName}")
+public class ${className}Controller {
+
+    private final ${className}Service ${classname}Service;
+
+    /**
+     * 构造器注入
+     */
+    @Autowired
+    public ${className}Controller(${className}Service ${className}Service) {
+        this.${className}Service = ${className}Service;
+    }
+
+    @PostMapping
+    @ApiOperation(value = "保存${comments}对象")
+    @ApiImplicitParam(name = "${classname}", value = "${comments}对象", paramType = "body", required = true, dataType = "${className}Entity")
+    @Log(module = ModuleConstant.BUSINESS, content = "保存${comments}对象", actionUrl = "${moduleName}/${pathName}", type = MethodTypeEnum.INSERT)
+    public CarpResult<Object> save(@RequestBody ${className}Entity ${classname}){
+        //是否成功验证
+        boolean booleanCode = ${className}Service.save(${classname});
+        //返回封装
+        if(booleanCode) {
+            return new CarpResult<>(ResultEnum.SUCCESS_CODE);
+        } else {
+            //抛异常
+            throw new BaseException(ModuleConstant.BUSINESS, ResultEnum.ADD_FAILED);
+        }
+    }
+
+    @PutMapping
+    @ApiOperation(value = "修改${comments}对象")
+    @ApiImplicitParam(name = "${classname}", value = "修改${comments}对象", paramType = "body", required = true, dataType = "${className}Entity")
+    @Log(module = ModuleConstant.BUSINESS, content = "修改${comments}对象", actionUrl = "${moduleName}/${pathName}", type = MethodTypeEnum.UPDATE)
+    public CarpResult<Object> update(@RequestBody ${className}Entity ${classname}){
+        //是否成功验证
+        boolean booleanCode = ${className}Service.updateById(${classname});
+        //返回封装
+        if(booleanCode) {
+            return new CarpResult<>(ResultEnum.SUCCESS_CODE);
+        } else {
+            //抛异常
+            throw new BaseException(ModuleConstant.BUSINESS, ResultEnum.UPDATE_FAILED);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "删除${comments}对象")
+    @ApiImplicitParam(name = "id", value = "删除${comments}对象", paramType = "body", required = true, dataType = "Long")
+    @Log(module = ModuleConstant.BUSINESS, content = "删除${comments}对象", actionUrl = "${moduleName}/${pathName}/{id}", type = MethodTypeEnum.DELETE)
+    public CarpResult<Object> delete(@PathVariable("id") Long id){
+        //是否成功验证
+        boolean booleanCode = ${className}Service.delete(id);
+        //返回封装
+        if(booleanCode) {
+            return new CarpResult<>(ResultEnum.SUCCESS_CODE);
+        } else {
+            //抛异常
+            throw new BaseException(ModuleConstant.BUSINESS, ResultEnum.ADD_FAILED);
+        }
+    }
+
+}

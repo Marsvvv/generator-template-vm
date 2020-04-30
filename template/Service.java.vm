@@ -1,0 +1,26 @@
+package ${package}.${moduleName}.service;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import ${package}.${moduleName}.entity.${className}Entity;
+
+import java.util.Map;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}Service extends IService<${className}Entity> {
+
+    /**
+    * 根据id删除
+    * @param id id
+    * @return 执行情况
+    */
+    Boolean delete(Long id);
+}
+
